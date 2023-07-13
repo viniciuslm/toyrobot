@@ -5,8 +5,9 @@ defmodule Toyrobot.Robo do
     |> process_commads()
   end
 
-  defp process_commads(commands, position \\ nil) do
+  defp process_commads(commands, position \\ nil)
   defp process_commads([], _), do: :end
+
   defp process_commads([command | other_commads], position) do
     position = process_command(command, position)
 
