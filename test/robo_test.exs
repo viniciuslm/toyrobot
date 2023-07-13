@@ -14,7 +14,7 @@ defmodule Toyrobot.RoboTest do
       REPORT
       """
 
-      assert Robo.call(commands) == :end
+      assert Robo.call(commands) == nil
     end
   end
 end

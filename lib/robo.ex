@@ -5,14 +5,19 @@ defmodule Toyrobot.Robo do
     |> process_commads()
   end
 
-  defp process_commads(commands, position \\ nil)
-  defp process_commads([], _), do: :end
-
-  defp process_commads([command | other_commads], position) do
-    position = process_command(command, position)
-
-    process_commads(other_commads, position)
+  defp process_commads(commands) do
+    commands |> IO.inspect()
+    process_commads(nil, commands)
   end
+
+  defp process_commads(position, []),
+    do: position
+
+  defp process_commads(position, [command | other_commads]),
+    do:
+      process_command(command, position)
+      |> IO.inspect()
+      |> process_commads(other_commads)
 
   defp process_command(_, nil), do: nil
 
@@ -36,6 +41,7 @@ defmodule Toyrobot.Robo do
 
   defp process_command("REPORT", {x, y, face}) do
     IO.puts("Robot is currently at (#{x}, #{y}) and it's facing #{face}")
+    {x, y, face}
   end
 
   defp process_move({x, y, "NORTH"}) do
@@ -71,5 +77,4 @@ defmodule Toyrobot.Robo do
   defp process_left("WEST"), do: "SOUTH"
   defp process_left("SOUTH"), do: "EAST"
   defp process_left("EAST"), do: "NORTH"
-  # de
 end
